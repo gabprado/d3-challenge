@@ -1,22 +1,21 @@
 const svgWidth = 960
 const svgHeight = 500
 let margin = {
-  top: 20,
-  right: 40,
-  bottom: 100,
-  left: 100
+    top: 20,
+    right: 40,
+    bottom: 100,
+    left: 100
 }
-
 let width = svgWidth - margin.left - margin.right
 let height = svgHeight - margin.top - margin.bottom
 let svg = d3
-  .select("#scatter")
-  .append("svg")
-  .attr("width", svgWidth)
-  .attr("height", svgHeight)
+    .select("#scatter")
+    .append("svg")
+    .attr("width", svgWidth)
+    .attr("height", svgHeight)
 let chartGroup = svg
-  .append("g")
-  .attr("transform", `translate(${margin.left}, ${margin.top})`)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`)
 let xSelection = "poverty"
 let xTipLabel = "In Poverty (%):"
 let ySelection = "obesity"
@@ -44,7 +43,7 @@ function yScale(data, ySelection) {
     return yLinearScale
 }
 
-function renderXAxes(newXScale, xAxis){
+function renderXAxes(newXScale, xAxis) {
     let bottomAxis = d3.axisBottom(newXScale)
     xAxis
         .transition()
@@ -53,7 +52,7 @@ function renderXAxes(newXScale, xAxis){
     return xAxis
 }
 
-function renderYAxes(newYScale, yAxis){
+function renderYAxes(newYScale, yAxis) {
     let leftAxis = d3.axisLeft(newYScale)
     yAxis
         .transition()
@@ -62,7 +61,7 @@ function renderYAxes(newYScale, yAxis){
     return yAxis
 }
 
-function renderCircles(circlesGroup, newXScale, xSelection, newYScale, ySelection){
+function renderCircles(circlesGroup, newXScale, xSelection, newYScale, ySelection) {
     circlesGroup
         .transition()
         .duration(1000)
@@ -71,7 +70,7 @@ function renderCircles(circlesGroup, newXScale, xSelection, newYScale, ySelectio
     return circlesGroup
 }
 
-function renderCirclesTextGroup(circlesTextGroup, newXScale, xSelection, newYScale, ySelection){
+function renderCirclesTextGroup(circlesTextGroup, newXScale, xSelection, newYScale, ySelection) {
     circlesTextGroup
         .transition()
         .duration(1000)
@@ -80,22 +79,21 @@ function renderCirclesTextGroup(circlesTextGroup, newXScale, xSelection, newYSca
     return circlesTextGroup
 }
 
-function renderToolTip(xSelection, xTipLabel, ySelection, yTipLabel, circlesGroup){
+function renderToolTip(xSelection, xTipLabel, ySelection, yTipLabel, circlesGroup) {
     let toolTip = d3
         .tip()
         .attr("class", "d3-tip")
         .html(d => `${d.state}<br>
                     ${xTipLabel}${d[xSelection]}<br>
-                    ${yTipLabel}${d[ySelection]}<br>`
-        )    
-        circlesGroup.call(toolTip)
-        circlesGroup
-            .on("mouseover", function(data) {
-                toolTip.show(data, this)
-            })
-            .on("mouseout", function(data) {
-                toolTip.hide(data)
-            })
+                    ${yTipLabel}${d[ySelection]}<br>`)
+    circlesGroup.call(toolTip)
+    circlesGroup
+        .on("mouseover", function(data) {
+            toolTip.show(data, this)
+        })
+        .on("mouseout", function(data) {
+            toolTip.hide(data)
+        })
     return circlesGroup
 }
 
@@ -221,12 +219,12 @@ function renderPlot() {
                 xAxis = renderXAxes(xLinearScale, xAxis)
                 refreshObjects(
                     xLinearScale,
-                    xSelection, 
-                    xTipLabel, 
-                    yLinearScale, 
-                    ySelection, 
-                    yTipLabel, 
-                    circlesGroup, 
+                    xSelection,
+                    xTipLabel,
+                    yLinearScale,
+                    ySelection,
+                    yTipLabel,
+                    circlesGroup,
                     circlesTextGroup
                 )
 
@@ -243,12 +241,12 @@ function renderPlot() {
                 yAxis = renderYAxes(yLinearScale, yAxis)
                 refreshObjects(
                     xLinearScale,
-                    xSelection, 
-                    xTipLabel, 
-                    yLinearScale, 
-                    ySelection, 
-                    yTipLabel, 
-                    circlesGroup, 
+                    xSelection,
+                    xTipLabel,
+                    yLinearScale,
+                    ySelection,
+                    yTipLabel,
+                    circlesGroup,
                     circlesTextGroup
                 )
             }
